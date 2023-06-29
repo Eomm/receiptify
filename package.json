@@ -1,0 +1,26 @@
+{
+  "name": "receiptify",
+  "version": "1.0.0",
+  "description": "Get a receipt for your listened songs!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "rome check lib/*.js",
+    "lint:fix": "rome format lib/ --write",
+    "rome": "rome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eomm/receiptify.git"
+  },
+  "keywords": [],
+  "author": "Manuel Spigolon <manuel.spigolon@nearform.com> (https://github.com/Eomm)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Eomm/receiptify/issues"
+  },
+  "homepage": "https://github.com/Eomm/receiptify#readme",
+  "devDependencies": {
+    "rome": "^11.0.0"
+  }
+}
