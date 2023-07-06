@@ -4,6 +4,9 @@ const fastifyStatic = require('@fastify/static')
 const fastifyEnv = require('@fastify/env')
 const fp = require('fastify-plugin')
 
+const healthPlugin = require('./plugins/health')
+const oauthPlugin = require('./plugins/oauth')
+
 const schemas = require('./schemas')
 
 module.exports = fp(appPlugin, { name: 'app' })
@@ -16,9 +19,8 @@ async function appPlugin (app, opts) {
     schema: schemas.envSchema
   })
 
-  app.get('/health', async function healthHandler (request, reply) {
-    return { status: 'ok' }
-  })
+  app.register(healthPlugin)
+  app.register(oauthPlugin)
 
   app.register(fastifyStatic, {
     root: app.appConfig.WEBSITE_PATH
