@@ -3,11 +3,6 @@
 const { test } = require('tap')
 
 const { buildApp } = require('./helper')
-const buildNativeApp = require('../src/app')
-
-test('Can\'t start without config', async t => {
-  await t.rejects(buildNativeApp())
-})
 
 test('App can be built', async t => {
   const app = await buildApp(t)

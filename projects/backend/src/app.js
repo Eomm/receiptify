@@ -1,22 +1,30 @@
 'use strict'
 
-const { fastify } = require('fastify')
 const fastifyStatic = require('@fastify/static')
+const fastifyEnv = require('@fastify/env')
+const fp = require('fastify-plugin')
 
-module.exports = buildApp
+const schemas = require('./schemas')
 
-async function buildApp (opts) {
-  const { serverConfig, appConfig } = opts || { appConfig: {} }
-  const app = fastify(serverConfig)
+module.exports = fp(appPlugin, { name: 'app' })
+
+async function appPlugin (app, opts) {
+  await app.register(fastifyEnv, {
+    confKey: 'appConfig',
+    dotenv: opts.configData.NODE_ENV !== 'test',
+    data: opts.configData,
+    schema: schemas.envSchema
+  })
 
   app.get('/health', async function healthHandler (request, reply) {
     return { status: 'ok' }
   })
 
   app.register(fastifyStatic, {
-    root: appConfig.staticWebsite
-    // constraints: { host: 'example.com' } // optional: default {}
+    root: app.appConfig.WEBSITE_PATH
   })
+
+  // https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
 
   return app
 }

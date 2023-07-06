@@ -1,21 +1,20 @@
 'use strict'
 
-const path = require('node:path')
+const { fastify } = require('fastify')
 
-const buildApp = require('./src/app')
+const appPlugin = require('./src/app')
 
 async function start () {
-  const app = await buildApp({
-    serverConfig: {
-      logger: true
-    },
-    appConfig: {
-      staticWebsite: path.resolve(__dirname, '../frontend/dist')
-    }
+  const app = fastify({
+    logger: true
+  })
+
+  await app.register(appPlugin, {
+    configData: process.env
   })
 
   try {
-    await app.listen({ port: 3000 })
+    await app.listen({ port: app.appConfig.PORT })
   } catch (err) {
     app.log.error(err)
     process.exit(1)
