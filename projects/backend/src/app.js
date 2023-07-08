@@ -2,6 +2,7 @@
 
 const fastifyStatic = require('@fastify/static')
 const fastifyEnv = require('@fastify/env')
+const fastifyCors = require('@fastify/cors')
 const fp = require('fastify-plugin')
 
 const healthPlugin = require('./plugins/health')
@@ -19,6 +20,13 @@ async function appPlugin (app, opts) {
     schema: schemas.envSchema
   })
 
+  app.register(fastifyCors, {
+    origin: new RegExp(app.appConfig.CORS_ORIGIN_REGEX),
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['content-type', 'authorization'],
+    credentials: false,
+    maxAge: 86400 // 24 hours
+  })
   app.register(healthPlugin)
   app.register(oauthPlugin)
 
