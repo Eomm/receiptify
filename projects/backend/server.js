@@ -14,6 +14,21 @@ async function start () {
   })
 
   try {
+
+    process.on('SIGINT', () => {
+      app.log.info('Gracefully shutting down')
+      app.close()
+        .then(() => {
+          app.log.info('Shut down complete')
+          process.exit(0)
+        })
+        .catch((err) => {
+          app.log.error(err)
+          process.exit(1)
+        })
+    })
+
+
     await app.listen({
       host: '0.0.0.0',
       port: app.appConfig.PORT
