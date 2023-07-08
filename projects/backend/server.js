@@ -14,7 +14,10 @@ async function start () {
   })
 
   try {
-    await app.listen({ port: app.appConfig.PORT })
+    await app.listen({
+      host: '0.0.0.0',
+      port: app.appConfig.PORT
+    })
   } catch (err) {
     app.log.error(err)
     process.exit(1)

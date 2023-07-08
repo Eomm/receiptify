@@ -22,6 +22,14 @@ During the development:
 
 Both the applications will be reloaded automatically whenever a change is made in the source code.
 
+> ℹ Note  
+> The `project.json` file is used by `nx` to identify the projects in the monorepo. **Do not delete it.**  
+> Configuring the `workspaces` in the root `package.json` file breaks the `fly` deployment.
+
 ## Production
 
 TODO: The frontend production build will be served by the backend application.
+
+TODO:
+  - multiple spotify credentials (dev/prod)
+  - CI workflow

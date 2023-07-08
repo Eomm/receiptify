@@ -9,7 +9,8 @@ module.exports.envSchema = {
     'WEBSITE_PATH',
     'CORS_ORIGIN_REGEX',
     'SPOTIFY_CLIENT_ID',
-    'SPOTIFY_CLIENT_SECRET'
+    'SPOTIFY_CLIENT_SECRET',
+    'OAUTH_REDIRECT_URI'
   ],
   properties: {
     NODE_ENV: {
@@ -23,6 +24,7 @@ module.exports.envSchema = {
     WEBSITE_PATH: { type: 'string' },
     CORS_ORIGIN_REGEX: { type: 'string' },
     SPOTIFY_CLIENT_ID: { type: 'string' },
-    SPOTIFY_CLIENT_SECRET: { type: 'string' }
+    SPOTIFY_CLIENT_SECRET: { type: 'string' },
+    OAUTH_REDIRECT_URI: { type: 'string' }
   }
 }

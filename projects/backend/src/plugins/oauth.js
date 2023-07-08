@@ -18,7 +18,7 @@ module.exports = function spotifyOauthPlugin (app, opts, next) {
     },
 
     startRedirectPath: '/login/spotify',
-    callbackUri: `http://localhost:${app.appConfig.PORT}/login/spotify/callback`
+    callbackUri: app.appConfig.OAUTH_REDIRECT_URI
   })
 
   app.get('/login/spotify/callback', async function oauth2Callback (req, reply) {

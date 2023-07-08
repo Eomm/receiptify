@@ -1,0 +1,27 @@
+# fly.toml app configuration file generated for receiptify on 2023-07-08T15:05:07+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "receiptify"
+primary_region = "mad"
+
+[env]
+  PORT = "8080"
+  SPOTIFY_CLIENT_ID="REDACTED"
+  SPOTIFY_CLIENT_SECRET="REDACTED"
+
+[build.args]
+  NODE_VERSION="20"
+  NODE_ENV="production"
+  WEBSITE_PATH="/app/frontend"
+  OAUTH_REDIRECT_URI="https://receiptify.fly.dev/login/spotify/callback"
+  CORS_ORIGIN_REGEX="^https://receiptify\\.fly\\.dev$"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]

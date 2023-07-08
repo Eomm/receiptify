@@ -31,8 +31,5 @@
       "author": true
     }
   ],
-  "license": "MIT",
-  "workspaces": [
-    "projects/*"
-  ]
+  "license": "MIT"
 }
