@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Home } from './features/Home'
 import './index.css'
 import { ProtectedRoute } from './routes/ProtectedRoute'
+import { PageNotFound } from "./routes/PageNotFound";
 
 export const App = () => {
   return (
@@ -16,6 +17,7 @@ export const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   )
