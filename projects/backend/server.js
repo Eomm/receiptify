@@ -14,10 +14,10 @@ async function start () {
   })
 
   try {
-
     process.on('SIGINT', () => {
       app.log.info('Gracefully shutting down')
-      app.close()
+      app
+        .close()
         .then(() => {
           app.log.info('Shut down complete')
           process.exit(0)
@@ -27,7 +27,6 @@ async function start () {
           process.exit(1)
         })
     })
-
 
     await app.listen({
       host: '0.0.0.0',
