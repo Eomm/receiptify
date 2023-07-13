@@ -14,8 +14,6 @@ jobs:
         with:
           persist-credentials: false
       - uses: superfly/flyctl-actions/setup-flyctl@v1
-      # fly secrets set DATABASE_URL=postgres://example.com/mydb 
-      # flyctl secrets set --detach --app $APP_NAME
       - run: |
          flyctl secrets set --detach SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }}
          flyctl secrets set --detach SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }}

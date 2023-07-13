@@ -3,7 +3,11 @@ Get a receipt for your listened songs!
 
 ## Installation
 
-This project requires [Node.js](https://nodejs.org/) v20+ to run.
+This project requires:
+
+- [Node.js](https://nodejs.org/) v20+ to run.
+- _[optional:]_[fly.io CLI](https://fly.io/docs/hands-on/install-flyctl/) to manage the application.
+
 
 TODO
 
