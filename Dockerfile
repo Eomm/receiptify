@@ -39,6 +39,9 @@ ENV CORS_ORIGIN_REGEX=${CORS_ORIGIN_REGEX}
 ARG OAUTH_REDIRECT_URI
 ENV OAUTH_REDIRECT_URI=${OAUTH_REDIRECT_URI}
 
+ARG API_BASE_URL
+ENV VITE_API_BASE_URL=${API_BASE_URL}
+
 COPY --chown=node:node --from=frontend-build /frontend/dist ${WEBSITE_PATH}
 COPY --chown=node:node --from=backend-build /backend /app
 
