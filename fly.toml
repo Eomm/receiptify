@@ -17,7 +17,7 @@ primary_region = "mad"
   WEBSITE_PATH="/app/frontend"
   OAUTH_REDIRECT_URI="https://receiptify.fly.dev/login/spotify/callback"
   CORS_ORIGIN_REGEX="^https://receiptify\\.fly\\.dev$"
-  API_BASE_URL="https://receiptify.fly.dev/"
+  API_BASE_URL="https://receiptify.fly.dev"
 
 [http_service]
   internal_port = 8080
