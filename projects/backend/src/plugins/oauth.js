@@ -21,8 +21,46 @@ module.exports = function spotifyOauthPlugin (app, opts, next) {
     callbackUri: app.appConfig.OAUTH_REDIRECT_URI
   })
 
+  app.register(require('@fastify/jwt'), {
+    secret: 'secret'
+  })
+
+  app.decorate('authenticate', async function (request, reply) {
+    try {
+      await request.jwtVerify()
+    } catch (err) {
+      reply.send(err)
+    }
+  })
+
   app.get('/login/spotify/callback', async function oauth2Callback (req, reply) {
     const result = await app.spotify.getAccessTokenFromAuthorizationCodeFlow(req)
+
+    const response = await fetch('https://api.spotify.com/v1/me', {
+      headers: {
+        Authorization: `Bearer ${result.token.access_token}`
+      }
+    })
+
+    if (!response.ok) {
+      return reply.send(response.statusText)
+    }
+
+    const data = await response.json()
+
+    const payload = {
+      iss: 'https://api.spotify.com',
+      tkn: encodeURIComponent(result.token.access_token),
+      rsh: encodeURIComponent(result.token.refresh_token),
+      name: data.display_name,
+      jti: data.email,
+      typ: 'sty',
+      exp: new Date(result.token.expires_at).getTime()
+    }
+
+    const token = app.jwt.sign({ payload })
+
+    console.log('JwtToken', token)
 
     // todo: call /me endpoint to get the user's email address
     // todo: store the new user in the our database
@@ -39,8 +77,8 @@ module.exports = function spotifyOauthPlugin (app, opts, next) {
     //   expires_at: "2023-07-06T17:36:27.792Z"
     //   }
 
-    return reply.redirect('/app.html?user=manuel')
-  })
+    const redirectUrl = `http://127.0.0.1:8080/login/spotify/callback?token=${encodeURIComponent(token)}`
 
-  next()
+    return reply.redirect(redirectUrl)
+  })
 }

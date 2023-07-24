@@ -5,7 +5,7 @@
   "main": "server.js",
   "private": true,
   "scripts": {
-    "dev": "node --watch server.js",
+    "dev": "node server.js",
     "test": "tap test/**/**.test.js"
   },
   "keywords": [],
@@ -24,6 +24,7 @@
   "dependencies": {
     "@fastify/cors": "^8.3.0",
     "@fastify/env": "^4.2.0",
+    "@fastify/jwt": "^7.2.0",
     "@fastify/oauth2": "^7.2.1",
     "@fastify/static": "^6.10.2",
     "fastify": "^4.18.0"
