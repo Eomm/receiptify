@@ -2,7 +2,7 @@
 
 const oauthPlugin = require('@fastify/oauth2')
 
-module.exports = function spotifyOauthPlugin (app, opts, next) {
+module.exports = async function spotifyOauthPlugin (app, opts, next) {
   app.register(oauthPlugin, {
     name: 'spotify',
 
