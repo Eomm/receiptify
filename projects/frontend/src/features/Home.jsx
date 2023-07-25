@@ -7,11 +7,11 @@ export const Home = () => {
   const [health, setHealth] = useState()
 
   useEffect(() => {
-   getHealth().then((response) => setHealth(response))
+    getHealth().then((response) => setHealth(response))
   }, [])
 
   console.log(health)
-  
+
   const handleClick = () => {
     window.location.href = API_URL + '/login/spotify'
   }
