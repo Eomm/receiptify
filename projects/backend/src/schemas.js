@@ -10,7 +10,8 @@ module.exports.envSchema = {
     'CORS_ORIGIN_REGEX',
     'SPOTIFY_CLIENT_ID',
     'SPOTIFY_CLIENT_SECRET',
-    'OAUTH_REDIRECT_URI'
+    'OAUTH_REDIRECT_URI',
+    'JWT_SECRET'
   ],
   properties: {
     NODE_ENV: {
@@ -25,6 +26,7 @@ module.exports.envSchema = {
     CORS_ORIGIN_REGEX: { type: 'string' },
     SPOTIFY_CLIENT_ID: { type: 'string' },
     SPOTIFY_CLIENT_SECRET: { type: 'string' },
-    OAUTH_REDIRECT_URI: { type: 'string' }
+    OAUTH_REDIRECT_URI: { type: 'string' },
+    JWT_SECRET: { type: 'string' }
   }
 }

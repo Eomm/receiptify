@@ -22,7 +22,7 @@ module.exports = async function spotifyOauthPlugin (app, opts, next) {
   })
 
   app.register(require('@fastify/jwt'), {
-    secret: 'secret'
+    secret: app.appConfig.JWT_SECRET
   })
 
   app.decorate('authenticate', async function (request, reply) {
