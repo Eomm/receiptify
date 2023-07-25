@@ -2,7 +2,7 @@
 
 const oauthPlugin = require('@fastify/oauth2')
 
-module.exports = async function spotifyOauthPlugin (app, opts, next) {
+module.exports = async function spotifyOauthPlugin (app, opts) {
   app.register(oauthPlugin, {
     name: 'spotify',
 
@@ -26,11 +26,7 @@ module.exports = async function spotifyOauthPlugin (app, opts, next) {
   })
 
   app.decorate('authenticate', async function (request, reply) {
-    try {
-      await request.jwtVerify()
-    } catch (err) {
-      reply.send(err)
-    }
+    await request.jwtVerify()
   })
 
   app.get('/login/spotify/callback', async function oauth2Callback (req, reply) {
@@ -60,22 +56,9 @@ module.exports = async function spotifyOauthPlugin (app, opts, next) {
 
     const token = app.jwt.sign({ payload })
 
-    console.log('JwtToken', token)
-
-    // todo: call /me endpoint to get the user's email address
     // todo: store the new user in the our database
-    // todo: generate a JWT for the user
 
     req.log.info('The Spotify token is %o', result.token)
-
-    // {
-    //   access_token: "llll",
-    //   token_type: "Bearer",
-    //   expires_in: 3600,
-    //   refresh_token: "llll",
-    //   scope: "user-read-email user-top-read",
-    //   expires_at: "2023-07-06T17:36:27.792Z"
-    //   }
 
     const redirectUrl = `http://127.0.0.1:8080/login/spotify/callback?token=${encodeURIComponent(token)}`
 
