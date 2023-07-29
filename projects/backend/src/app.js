@@ -31,7 +31,12 @@ async function appPlugin (app, opts) {
   app.register(oauthPlugin)
 
   app.register(fastifyStatic, {
-    root: app.appConfig.WEBSITE_PATH
+    root: app.appConfig.WEBSITE_PATH,
+    prefix: '/'
+  })
+
+  app.setNotFoundHandler(function basic404 (request, reply) {
+    return reply.sendFile('index.html')
   })
 
   // https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
