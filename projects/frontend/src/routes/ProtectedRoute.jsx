@@ -1,10 +1,16 @@
 import { Navigate } from 'react-router-dom'
 
 export const ProtectedRoute = ({ children }) => {
-  // todo: use hook to get user from context
-  const user = null
+  let token = localStorage.getItem('token')
+  if (!token) {
+    token = new URLSearchParams(window.location.search).get('token')
 
-  if (!user) {
+    if (token) {
+      localStorage.setItem('token', token)
+    }
+  }
+
+  if (!token) {
     return <Navigate to="/" replace />
   }
 

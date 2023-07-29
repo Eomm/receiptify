@@ -10,7 +10,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
-          path="/login/spotify/callback"
+          path="/login/success"
           element={
             <ProtectedRoute>
               <div>Login OK</div>

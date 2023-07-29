@@ -11,6 +11,7 @@ module.exports.envSchema = {
     'SPOTIFY_CLIENT_ID',
     'SPOTIFY_CLIENT_SECRET',
     'OAUTH_REDIRECT_URI',
+    'SUCCESS_REDIRECT_URI',
     'JWT_SECRET'
   ],
   properties: {
@@ -27,6 +28,7 @@ module.exports.envSchema = {
     SPOTIFY_CLIENT_ID: { type: 'string' },
     SPOTIFY_CLIENT_SECRET: { type: 'string' },
     OAUTH_REDIRECT_URI: { type: 'string' },
+    SUCCESS_REDIRECT_URI: { type: 'string' },
     JWT_SECRET: { type: 'string' }
   }
 }

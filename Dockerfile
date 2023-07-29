@@ -11,6 +11,9 @@ WORKDIR /app
 # Frontend build stage
 FROM base as frontend-build
 
+ARG API_BASE_URL
+ENV VITE_API_URL=${API_BASE_URL}
+
 WORKDIR /frontend
 COPY --link projects/frontend/ .
 RUN npm ci && npm run build
@@ -39,8 +42,8 @@ ENV CORS_ORIGIN_REGEX=${CORS_ORIGIN_REGEX}
 ARG OAUTH_REDIRECT_URI
 ENV OAUTH_REDIRECT_URI=${OAUTH_REDIRECT_URI}
 
-ARG API_BASE_URL
-ENV VITE_API_BASE_URL=${API_BASE_URL}
+ARG SUCCESS_REDIRECT_URI
+ENV SUCCESS_REDIRECT_URI=${SUCCESS_REDIRECT_URI}
 
 COPY --chown=node:node --from=frontend-build /frontend/dist ${WEBSITE_PATH}
 COPY --chown=node:node --from=backend-build /backend /app

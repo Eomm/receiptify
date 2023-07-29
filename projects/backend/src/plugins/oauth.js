@@ -1,6 +1,7 @@
 'use strict'
 
 const oauthPlugin = require('@fastify/oauth2')
+const jwtPlugin = require('@fastify/jwt')
 
 module.exports = async function spotifyOauthPlugin (app, opts) {
   app.register(oauthPlugin, {
@@ -21,7 +22,7 @@ module.exports = async function spotifyOauthPlugin (app, opts) {
     callbackUri: app.appConfig.OAUTH_REDIRECT_URI
   })
 
-  app.register(require('@fastify/jwt'), {
+  app.register(jwtPlugin, {
     secret: app.appConfig.JWT_SECRET
   })
 
@@ -39,28 +40,32 @@ module.exports = async function spotifyOauthPlugin (app, opts) {
     })
 
     if (!response.ok) {
-      return reply.send(response.statusText)
+      reply.status(500)
+      return response.statusText
     }
 
     const data = await response.json()
 
-    const payload = {
-      iss: 'https://api.spotify.com',
+    const tokenData = {
       tkn: encodeURIComponent(result.token.access_token),
-      rsh: encodeURIComponent(result.token.refresh_token),
-      name: data.display_name,
-      jti: data.email,
-      typ: 'sty',
-      exp: new Date(result.token.expires_at).getTime()
+      rsh: encodeURIComponent(result.token.refresh_token)
     }
 
-    const token = app.jwt.sign({ payload })
+    const tokenOptions = {
+      iss: 'api.receiptify.dev',
+      jti: data.email,
+      sub: data.display_name,
+      exp: result.token.expires_at.getTime()
+    }
+
+    const token = app.jwt.sign(tokenData, tokenOptions)
 
     // todo: store the new user in the our database
 
     req.log.info('The Spotify token is %o', result.token)
 
-    const redirectUrl = `http://127.0.0.1:8080/login/spotify/callback?token=${encodeURIComponent(token)}`
+    // todo: encrypt the token before sending it to the client
+    const redirectUrl = `${app.appConfig.SUCCESS_REDIRECT_URI}?token=${encodeURIComponent(token)}`
 
     return reply.redirect(redirectUrl)
   })

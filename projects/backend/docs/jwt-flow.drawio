@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="CRIYX2zX5tSCqpigr5Dh" name="Page-1">
-        <mxGraphModel dx="906" dy="682" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="686" dy="618" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -79,10 +79,12 @@
                 <mxCell id="29" value="Saving JWT Token" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="225" y="240" width="140" height="25" as="geometry"/>
                 </mxCell>
-                <mxCell id="52" style="edgeStyle=none;html=1;entryX=-0.02;entryY=0.387;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" source="30" target="50" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="52" style="edgeStyle=none;html=1;startArrow=classic;startFill=1;" parent="1" source="30" target="47" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="699" y="405" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="54" value="JWT Token" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="52" vertex="1" connectable="0">
+                <mxCell id="54" value="Token" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="52" vertex="1" connectable="0">
                     <mxGeometry x="0.0124" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
@@ -114,22 +116,15 @@
                 <mxCell id="47" value="/tracks" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="780" y="325" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="48" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="50" target="47" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="49" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="50" target="51" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="74" value="JWT Token" style="edgeStyle=none;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=-0.02;exitY=0.941;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="50" target="65">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="50" value="verify&lt;br&gt;JWT&amp;nbsp;&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="700" y="319" width="50" height="221" as="geometry"/>
+                <mxCell id="74" value="Token" style="edgeStyle=none;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="67" target="65" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="699" y="526.961" as="sourcePoint"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="51" value="/artists" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="780" y="385" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="53" value="JWT Token" style="edgeStyle=none;html=1;entryX=-0.02;entryY=0.387;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" edge="1">
+                <mxCell id="53" value="Token" style="edgeStyle=none;html=1;startArrow=classic;startFill=1;" parent="1" edge="1" target="51">
                     <mxGeometry x="0.0075" relative="1" as="geometry">
                         <mxPoint x="621" y="419.9981395348836" as="sourcePoint"/>
                         <mxPoint x="700" y="427.98999999999995" as="targetPoint"/>
@@ -154,7 +149,7 @@
                         <mxPoint x="530" y="435" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="59" value="JWT Token" style="edgeStyle=none;html=1;startArrow=classic;startFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="57" edge="1">
+                <mxCell id="59" value="Token" style="edgeStyle=none;html=1;startArrow=classic;startFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="57" edge="1" target="60">
                     <mxGeometry x="0.0075" relative="1" as="geometry">
                         <mxPoint x="631" y="429.99813953488365" as="sourcePoint"/>
                         <mxPoint x="700" y="440" as="targetPoint"/>
@@ -164,46 +159,36 @@
                 <mxCell id="60" value="/me" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="780" y="445" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="61" style="edgeStyle=none;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="50" target="60" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="760" y="418.63636363636374" as="sourcePoint"/>
-                        <mxPoint x="790" y="435" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
                 <mxCell id="63" value="Logout" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="245" y="459" width="100" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="64" value="Refresh" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="245" y="510" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="73" value="Refresh Token" style="edgeStyle=none;html=1;entryX=0.02;entryY=0.833;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="65" target="50">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="73" value="Refresh Token" style="edgeStyle=none;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="65" target="67" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="701" y="503.0930000000001" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="65" value="/refresh" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="65" value="/refresh" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="520" y="509" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="66" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.889;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="33" target="65">
+                <mxCell id="66" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.889;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="33" target="65" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="500.75" y="463.95000000000005" as="sourcePoint"/>
                         <mxPoint x="530" y="486" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="67" value="/refresh" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="67" value="/refresh" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="780" y="496" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="68" style="edgeStyle=none;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=1;exitY=0.905;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" target="67" source="50">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="750" y="512.5" as="sourcePoint"/>
-                        <mxPoint x="790" y="486" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="70" value="JWT Token" style="edgeStyle=none;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="63" target="33">
+                <mxCell id="70" value="JWT Token" style="edgeStyle=none;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="63" target="33" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="355" y="439" as="sourcePoint"/>
                         <mxPoint x="443.25" y="453.69000000000005" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="71" value="JWT Token" style="edgeStyle=none;html=1;entryX=0;entryY=0.895;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" target="33">
+                <mxCell id="71" value="JWT Token" style="edgeStyle=none;html=1;entryX=0;entryY=0.895;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;" parent="1" target="33" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="345" y="522.65" as="sourcePoint"/>
                         <mxPoint x="433.25" y="537.34" as="targetPoint"/>
