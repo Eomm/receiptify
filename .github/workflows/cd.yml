@@ -1,0 +1,25 @@
+name: CD
+on:
+  push:
+    branches:
+      - main
+      - draft # TEMPORARY: remove this line when you're ready to deploy to production!!
+
+jobs:
+  deploy:
+    name: Deploy to Fly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - uses: superfly/flyctl-actions/setup-flyctl@v1
+      - run: |
+         echo "Setting secrets..."
+         flyctl secrets set SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }}
+         flyctl secrets set SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }}
+         flyctl secrets set JWT_SECRET=${{ secrets.JWT_SECRET }}
+         echo "Deploying to Fly..."
+         flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

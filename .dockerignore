@@ -1,0 +1,8 @@
+fly.toml
+Dockerfile
+.dockerignore
+node_modules
+projects/frontend/node_modules
+projects/frontend/dist
+projects/backend/node_modules
+.git
