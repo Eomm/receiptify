@@ -5,6 +5,7 @@ import './app.css'
 import { Home } from './features/Home'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 import { PageNotFound } from "./routes/PageNotFound";
+import { StatsPage } from "./routes/StatsPage";
 
 export const App = () => {
   return (
@@ -26,7 +27,7 @@ export const App = () => {
           path="/login/success"
           element={
             <ProtectedRoute>
-              <div>Login OK</div>
+              <StatsPage />
             </ProtectedRoute>
           }
         />
