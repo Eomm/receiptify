@@ -1,7 +1,6 @@
 'use strict'
 
 const oauthPlugin = require('@fastify/oauth2')
-const jwtPlugin = require('@fastify/jwt')
 
 module.exports = async function spotifyOauthPlugin (app, opts) {
   app.register(oauthPlugin, {
@@ -20,14 +19,6 @@ module.exports = async function spotifyOauthPlugin (app, opts) {
 
     startRedirectPath: '/login/spotify',
     callbackUri: app.appConfig.OAUTH_REDIRECT_URI
-  })
-
-  app.register(jwtPlugin, {
-    secret: app.appConfig.JWT_SECRET
-  })
-
-  app.decorate('authenticate', async function (request, reply) {
-    await request.jwtVerify()
   })
 
   app.get('/login/spotify/callback', async function oauth2Callback (req, reply) {
