@@ -28,6 +28,7 @@ const mock = {
 
 module.exports = async function spotifyPlugin (app, opts) {
   app.get('/top', {
+    onRequest: [app.authenticate],
     schema: {
       querystring: queryParams
     },
