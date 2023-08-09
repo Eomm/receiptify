@@ -7,7 +7,7 @@ const fp = require('fastify-plugin')
 
 const healthPlugin = require('./plugins/health')
 const oauthPlugin = require('./plugins/oauth')
-const jwtPlugin = require('./plugins/jwtauth')
+const jwtPlugin = require('./plugins/jwt-auth')
 
 const spotifyRoutes = require('./routes/api-spotify')
 
