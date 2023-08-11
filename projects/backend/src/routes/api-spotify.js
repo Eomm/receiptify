@@ -34,6 +34,25 @@ module.exports = async function spotifyPlugin (app, opts) {
     },
     handler: async function readUserStats (req, reply) {
       // todo: response adapter
+      const type = req.query.display
+      const accessToken = req.user.tkn
+
+      const response = await fetch(`https://api.spotify.com/v1/me/top/${type}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+
+      console.log('response', response)
+
+      if (!response.ok) {
+        throw new Error(`Errore durante la chiamata all'API di Spotify: ${response.statusText}`)
+      }
+
+      // commentati altrimenti da errore
+      // const responseData = await response.json()
+      // return reply.send(responseData)
+
       return mock[req.query.display]
     }
   })
