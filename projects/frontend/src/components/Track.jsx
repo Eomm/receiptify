@@ -5,7 +5,7 @@ export const Track = ({ track, rank }) => {
       <img
         src={track.album.images[0].url}
         alt={track.name}
-        className="w-full h-40 object-cover rounded-lg"
+        class="w-full h-50 rounded-lg hover:scale-110 transition duration-500 cursor-pointer object-cover"
       />
       <div className="absolute top-0 left-0 bg-teal-700 text-white font-semibold rounded-full p-2 m-2 border-2 border-rose-500">
         {rank + 1}
