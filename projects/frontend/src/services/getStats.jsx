@@ -1,9 +1,10 @@
 const API_URL = import.meta.env.VITE_API_URL
 
-export const getStats = async (display, timing) => {
+export const getStats = async ({ display, timeframe, limit }) => {
   const query = new URLSearchParams({
+    limit,
     display,
-    timeframe: timing,
+    timeframe,
   })
 
   const url = `${API_URL}/api/spotify/top?${query}`

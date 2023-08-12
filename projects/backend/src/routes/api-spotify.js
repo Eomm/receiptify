@@ -16,15 +16,21 @@ const queryParams = {
         'medium_term', // 6 months
         'long_term' // all time
       ]
+    },
+    limit: {
+      type: 'integer',
+      default: 20,
+      minimum: 1,
+      maximum: 50
     }
   }
 }
 
-const mock = {
-  tracks: require('./mock/top-tracks'),
-  artists: require('./mock/top-artists'),
-  genres: new Error('Not implemented')
-}
+// const mock = {
+//   tracks: require('./mock/top-tracks'),
+//   artists: require('./mock/top-artists'),
+//   genres: new Error('Not implemented')
+// }
 
 module.exports = async function spotifyPlugin (app, opts) {
   app.get('/top', {
@@ -35,25 +41,28 @@ module.exports = async function spotifyPlugin (app, opts) {
     handler: async function readUserStats (req, reply) {
       // todo: response adapter
       const type = req.query.display
-      const accessToken = req.user.tkn
+      const accessToken = decodeURIComponent(req.user.tkn)
 
-      const response = await fetch(`https://api.spotify.com/v1/me/top/${type}`, {
+      const query = new URLSearchParams({
+        time_range: req.query.timeframe,
+        limit: req.query.limit
+      })
+
+      const response = await fetch(`https://api.spotify.com/v1/me/top/${type}?${query}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       })
 
-      console.log('response', response)
-
       if (!response.ok) {
-        throw new Error(`Errore durante la chiamata all'API di Spotify: ${response.statusText}`)
+        req.log.error({ error: response }, 'Error calling spotify API')
+        throw new Error(`Wrong Spotify response: ${response.statusText}`)
       }
 
-      // commentati altrimenti da errore
-      // const responseData = await response.json()
-      // return reply.send(responseData)
+      const responseData = await response.json()
+      return reply.send(responseData)
 
-      return mock[req.query.display]
+      // return mock[req.query.display]
     }
   })
 }

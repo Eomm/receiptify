@@ -6,7 +6,7 @@ module.exports = async function spotifyOauthPlugin (app, opts) {
   app.register(oauthPlugin, {
     name: 'spotify',
 
-    scope: ['user-read-email', 'user-top-read'],
+    scope: ['user-read-email', 'user-top-read', 'user-follow-read'],
 
     credentials: {
       client: {

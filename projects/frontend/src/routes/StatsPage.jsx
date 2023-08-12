@@ -8,19 +8,25 @@ import { getStats } from '../services/getStats'
 export const StatsPage = () => {
   const [displayOption, setDisplayOption] = useState('tracks');
   const [aggregationTime, setAggregationTime] = useState('short_term');
+  const [displayLimit, setDisplayLimit] = useState('9');
+
   const [statsData, setStatsData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchStatsData();
-  }, [displayOption, aggregationTime]);
+  }, [displayOption, aggregationTime, displayLimit]);
 
   const fetchStatsData = () => {
     setIsLoading(true);
     setError(null);
 
-    getStats(displayOption, aggregationTime)
+    getStats({
+      limit: displayLimit,
+      display: displayOption,
+      timeframe: aggregationTime,
+    })
       .then((data) => {
         setStatsData(data.items);
       })
@@ -59,6 +65,16 @@ export const StatsPage = () => {
               <option value="medium_term">Last 6 Months</option>
               <option value="long_term">All Time</option>
             </select>
+
+            {/* Display limit */}
+            <input
+              className="text-black hover:text-white bg-rose-400 px-4 py-2 rounded-md"
+              type="range"
+              min="1"
+              max="50"
+              value={displayLimit}
+              onChange={(e) => setDisplayLimit(e.target.value)}
+            />
           </div>
         </nav>
       </header>
