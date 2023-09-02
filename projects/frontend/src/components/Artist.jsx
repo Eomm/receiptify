@@ -5,7 +5,7 @@ export const Artist = ({ artist, rank }) => {
       <img
         src={artist.images[0].url}
         alt={artist.name}
-        class="w-full h-50 rounded-lg hover:scale-110 transition duration-500 cursor-pointer object-cover"
+        className="w-full h-50 rounded-lg hover:scale-110 transition duration-500 cursor-pointer object-cover"
       />
       <div className="absolute top-0 left-0 bg-teal-700 text-white font-semibold rounded-full p-2 m-2 border-2 border-rose-500">
         {rank + 1}
