@@ -1,13 +1,26 @@
-import { Route, Routes } from 'react-router-dom'
+import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 
 import './app.css'
 
 import { Home } from './features/Home'
 import { ProtectedRoute } from './routes/ProtectedRoute'
-import { PageNotFound } from "./routes/PageNotFound";
-import { StatsPage } from "./routes/StatsPage";
+import { PageNotFound } from './routes/PageNotFound'
+import { StatsPage } from './routes/StatsPage'
+import { logout } from './services/logout'
 
 export const App = () => {
+  const navigate = useNavigate()
+
+  const logoutUser = () => {
+    logout().then(() => {
+      localStorage.removeItem('token')
+      localStorage.removeItem('tokenTime')
+      navigate('/')
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
   return (
     <>
       <header className="bg-teal-700 py-4">
@@ -19,6 +32,8 @@ export const App = () => {
             <li><a href="#" className="hover:bg-rose-400 px-8 py-4 rounded-md">Home</a></li>
             <li><a href="#" className="hover:bg-rose-400 px-8 py-4 rounded-md">How It Works</a></li>
             <li><a href="#" className="hover:bg-rose-400 px-8 py-4 rounded-md">Privacy Policy</a></li>
+            <li><Link className="hover:bg-rose-400 px-8 py-4 rounded-md" onClick={logoutUser}>Logout</Link>
+            </li>
           </ul>
         </nav>
       </header>
