@@ -3,40 +3,18 @@ import React, { useEffect, useState } from 'react';
 import { Artist } from '../components/Artist';
 import { Track } from '../components/Track';
 
-import { getStats } from '../services/getStats'
+import { useGetStats } from '../hook/useGetStats';
 
 export const StatsPage = () => {
   const [displayOption, setDisplayOption] = useState('tracks');
   const [aggregationTime, setAggregationTime] = useState('short_term');
   const [displayLimit, setDisplayLimit] = useState('9');
 
-  const [statsData, setStatsData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { statsData, isLoading, error, fetchStatsData } = useGetStats();
 
   useEffect(() => {
-    fetchStatsData();
-  }, [displayOption, aggregationTime, displayLimit]);
-
-  const fetchStatsData = () => {
-    setIsLoading(true);
-    setError(null);
-
-    getStats({
-      limit: displayLimit,
-      display: displayOption,
-      timeframe: aggregationTime,
-    })
-      .then((data) => {
-        setStatsData(data.items);
-      })
-      .catch((error) => {
-        setError(`Error fetching data [${error.message}]. Please try again later.`);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+    fetchStatsData(displayLimit, displayOption, aggregationTime);
+  }, [displayOption, aggregationTime, displayLimit, fetchStatsData]);
 
   return (
     <>
