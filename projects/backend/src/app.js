@@ -7,6 +7,10 @@ const fp = require('fastify-plugin')
 
 const healthPlugin = require('./plugins/health')
 const oauthPlugin = require('./plugins/oauth')
+const jwtPlugin = require('./plugins/jwt-auth')
+
+const spotifyRoutes = require('./routes/api-spotify')
+const logout = require('./routes/logout')
 
 const schemas = require('./schemas')
 
@@ -29,6 +33,10 @@ async function appPlugin (app, opts) {
   })
   app.register(healthPlugin)
   app.register(oauthPlugin)
+  app.register(jwtPlugin)
+
+  app.register(spotifyRoutes, { prefix: '/api/spotify' })
+  app.register(logout)
 
   app.register(fastifyStatic, {
     root: app.appConfig.WEBSITE_PATH,
