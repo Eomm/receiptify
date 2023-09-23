@@ -18,7 +18,7 @@ export const StatsPage = () => {
 
   return (
     <>
-      <header className="bg-teal-200 py-4 sticky top-0">
+      <header className="bg-teal-200 py-4 sticky top-0 z-1">
         <nav className="container mx-auto flex items-center justify-between">
           <h1 className="text-black text-2xl">Print recipe:</h1>
           <div className="flex space-x-4 text-white">
