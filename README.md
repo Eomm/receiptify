@@ -1,6 +1,9 @@
 # receiptify
 Get a receipt for your listened songs!
 
+This project is a refactored version of the original receiptify idea by [@michellexliu](https://github.com/michellexliu/receiptify).
+This refactor is based on **Fastify** and **React + Vite** and _it does not include advertisements_.
+
 ## Installation
 
 This project requires:
@@ -8,8 +11,12 @@ This project requires:
 - [Node.js](https://nodejs.org/) v20+ to run.
 - _[optional:]_[fly.io CLI](https://fly.io/docs/hands-on/install-flyctl/) to manage the application.
 
+To install the dependancies run the following command from the root directory:
 
-TODO
+```bash
+npm ci
+npm run install:all
+```
 
 ## Development
 
