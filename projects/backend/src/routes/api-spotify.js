@@ -1,5 +1,7 @@
 'use strict'
 
+const { randomUUID } = require('node:crypto')
+
 const queryParams = {
   type: 'object',
   properties: {
@@ -63,6 +65,18 @@ module.exports = async function spotifyPlugin (app, opts) {
       return reply.send(responseData)
 
       // return mock[req.query.display]
+    }
+  })
+
+  app.post('/share', {
+    onRequest: [app.authenticate],
+    schema: {
+      body: queryParams
+    },
+    handler: async function generateLink (req, reply) {
+      // todo
+
+      return { shareId: randomUUID() }
     }
   })
 }

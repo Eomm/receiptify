@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import { createLink } from "../services/createLink";
+import { ShareLink } from './ShareLink';
+
 export const FilterForm = ({
   onInputChange
 }) => {
@@ -47,6 +50,15 @@ export const FilterForm = ({
           onChange={(e) => setDisplayLimit(e.target.value)}
         />
       </div>
+      <ShareLink onShare={async () => {
+        const link = await createLink({
+          display: displayOption,
+          timeframe: aggregationTime,
+          limit: displayLimit,
+        })
+
+        navigator.clipboard.writeText(link);
+      }} />
     </nav>
   );
 };
