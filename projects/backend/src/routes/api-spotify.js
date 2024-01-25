@@ -1,5 +1,7 @@
 'use strict'
 
+const { randomUUID } = require('node:crypto')
+
 const queryParams = {
   type: 'object',
   properties: {
@@ -25,12 +27,6 @@ const queryParams = {
     }
   }
 }
-
-// const mock = {
-//   tracks: require('./mock/top-tracks'),
-//   artists: require('./mock/top-artists'),
-//   genres: new Error('Not implemented')
-// }
 
 module.exports = async function spotifyPlugin (app, opts) {
   app.get('/top', {
@@ -61,8 +57,33 @@ module.exports = async function spotifyPlugin (app, opts) {
 
       const responseData = await response.json()
       return reply.send(responseData)
+    }
+  })
 
-      // return mock[req.query.display]
+  app.post('/share', {
+    onRequest: [app.authenticate],
+    schema: {
+      body: queryParams
+    },
+    handler: async function generateSharedLink (req, reply) {
+      // todo
+      return { shareId: randomUUID() }
+    }
+  })
+
+  app.get('/share/:shareId', {
+    // todo rate limit
+    schema: {
+      params: {
+        shareId: {
+          type: 'string',
+          maxLength: 36
+        }
+      }
+    },
+    handler: async function readSharedLink (req, reply) {
+      // todo
+      return require('./mock/top-tracks')
     }
   })
 }
