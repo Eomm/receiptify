@@ -19,6 +19,7 @@ jobs:
          flyctl secrets set SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }}
          flyctl secrets set SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }}
          flyctl secrets set JWT_SECRET=${{ secrets.JWT_SECRET }}
+         flyctl secrets set DB_URL=${{ secrets.DB_URL }}
          echo "Deploying to Fly..."
          flyctl deploy --remote-only
         env:

@@ -5,6 +5,7 @@ const fastifyEnv = require('@fastify/env')
 const fastifyCors = require('@fastify/cors')
 const fp = require('fastify-plugin')
 
+const dbPlugin = require('./plugins/database')
 const healthPlugin = require('./plugins/health')
 const oauthPlugin = require('./plugins/oauth')
 const jwtPlugin = require('./plugins/jwt-auth')
@@ -34,6 +35,7 @@ async function appPlugin (app, opts) {
   app.register(healthPlugin)
   app.register(oauthPlugin)
   app.register(jwtPlugin)
+  app.register(dbPlugin, { connectionString: app.appConfig.DB_URL })
 
   app.register(spotifyRoutes, { prefix: '/api/spotify' })
   app.register(logout)

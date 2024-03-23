@@ -36,26 +36,7 @@ module.exports = async function spotifyPlugin (app, opts) {
     },
     handler: async function readUserStats (req, reply) {
       // todo: response adapter
-      const type = req.query.display
-      const accessToken = decodeURIComponent(req.user.tkn)
-
-      const query = new URLSearchParams({
-        time_range: req.query.timeframe,
-        limit: req.query.limit
-      })
-
-      const response = await fetch(`https://api.spotify.com/v1/me/top/${type}?${query}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      })
-
-      if (!response.ok) {
-        req.log.error({ error: response }, 'Error calling spotify API')
-        throw new Error(`Wrong Spotify response: ${response.statusText}`)
-      }
-
-      const responseData = await response.json()
+      const responseData = await querySpotify(req.query, req.user)
       return reply.send(responseData)
     }
   })
@@ -63,11 +44,32 @@ module.exports = async function spotifyPlugin (app, opts) {
   app.post('/share', {
     onRequest: [app.authenticate],
     schema: {
-      body: queryParams
+      body: queryParams,
+      response: {
+        200: {
+          type: 'object',
+          properties: {
+            shareId: {
+              type: 'string',
+              maxLength: 36
+            }
+          }
+        }
+      }
     },
     handler: async function generateSharedLink (req, reply) {
-      // todo
-      return { shareId: randomUUID() }
+      const responseData = await querySpotify(req.body, req.user)
+
+      const shareItem = {
+        shareId: randomUUID(),
+        sharedBy: req.user.sub,
+        filters: req.body,
+        sharedContent: responseData
+      }
+
+      await app.insertShare(shareItem)
+
+      return shareItem
     }
   })
 
@@ -82,8 +84,37 @@ module.exports = async function spotifyPlugin (app, opts) {
       }
     },
     handler: async function readSharedLink (req, reply) {
-      // todo
-      return require('./mock/top-tracks')
+      const shareItem = await app.getShare(req.params.shareId)
+      if (!shareItem) {
+        return reply.notFound()
+      }
+
+      return shareItem.sharedcontent // todo lowercase!!
     }
   })
+
+  // TODO: memoize this function
+  async function querySpotify ({ display, timeframe, limit }, user) {
+    const type = display
+    const accessToken = decodeURIComponent(user.tkn)
+
+    const query = new URLSearchParams({
+      time_range: timeframe,
+      limit
+    })
+
+    const response = await fetch(`https://api.spotify.com/v1/me/top/${type}?${query}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+
+    if (!response.ok) {
+      app.log.error({ error: response, user: user.sub }, 'Error calling spotify API')
+      throw new Error(`Wrong Spotify response: ${response.statusText}`)
+    }
+
+    const responseData = await response.json()
+    return responseData
+  }
 }

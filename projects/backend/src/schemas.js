@@ -6,6 +6,7 @@ module.exports.envSchema = {
   required: [
     'NODE_ENV',
     'PORT',
+    'DB_URL',
     'WEBSITE_PATH',
     'CORS_ORIGIN_REGEX',
     'SPOTIFY_CLIENT_ID',
@@ -23,6 +24,7 @@ module.exports.envSchema = {
       type: 'integer',
       default: 3000
     },
+    DB_URL: { type: 'string' },
     WEBSITE_PATH: { type: 'string' },
     CORS_ORIGIN_REGEX: { type: 'string' },
     SPOTIFY_CLIENT_ID: { type: 'string' },
