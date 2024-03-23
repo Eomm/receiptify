@@ -28,6 +28,7 @@
     "@fastify/oauth2": "^7.2.1",
     "@fastify/postgres": "^5.2.2",
     "@fastify/static": "^6.10.2",
+    "@nearform/sql": "^1.10.5",
     "fastify": "^4.18.0",
     "pg": "^8.11.3",
     "postgrator": "^7.2.0"
