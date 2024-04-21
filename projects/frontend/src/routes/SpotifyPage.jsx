@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Artist } from '../components/Artist';
-import { Track } from '../components/Track';
+import { DisplayList } from '../components/DisplayList';
 
 import { FilterForm } from '../components/FilterForm';
 
@@ -30,20 +29,7 @@ export const SpotifyPage = ({ showControls, statsFetcher }) => {
           <div className="text-center text-gray-400">Loading...</div>
         ) : error ? (
           <div className="text-center text-red-500 text-xl">{error}</div>
-        ) : <ul>
-          <div className="grid grid-cols-3 gap-4">
-            {
-              statsData.map((item, index) => {
-                switch (item.type) {
-                  case 'track':
-                    return <Track key={index} track={item} rank={index} />;
-                  case 'artist':
-                    return <Artist key={index} artist={item} rank={index} />;
-                }
-              })
-            }
-          </div>
-        </ul>}
+        ) : <DisplayList data={statsData} />}
       </div>
     </>
   );

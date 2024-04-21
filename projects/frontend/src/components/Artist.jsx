@@ -3,7 +3,7 @@ export const Artist = ({ artist, rank }) => {
   return (
     <div key={artist.id} className="bg-white rounded-lg shadow-md p-4 relative">
       <img
-        src={artist.images[0].url}
+        src={artist.images[0]?.url}
         alt={artist.name}
         className="w-full h-50 rounded-lg hover:scale-110 transition duration-500 cursor-pointer object-cover"
       />
