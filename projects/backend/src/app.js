@@ -3,6 +3,7 @@
 const fastifyStatic = require('@fastify/static')
 const fastifyEnv = require('@fastify/env')
 const fastifyCors = require('@fastify/cors')
+const fastifySensible = require('@fastify/sensible')
 const fp = require('fastify-plugin')
 
 const dbPlugin = require('./plugins/database')
@@ -32,6 +33,7 @@ async function appPlugin (app, opts) {
     credentials: false,
     maxAge: 86400 // 24 hours
   })
+  app.register(fastifySensible)
   app.register(healthPlugin)
   app.register(oauthPlugin)
   app.register(jwtPlugin)

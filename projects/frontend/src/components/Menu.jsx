@@ -37,7 +37,7 @@ export const Menu = () => {
         </div>
 
         <ul className={`lg:flex ${isOpen ? 'block' : 'hidden'} flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 text-white`}>
-          <li><a href="#" className="bg-rose-400 hover:bg-rose-600 px-8 py-4 rounded-md">Home</a></li>
+          <li><a href="/" className="bg-rose-400 hover:bg-rose-600 px-8 py-4 rounded-md">Home</a></li>
           <li><a href="#" className="bg-rose-400 hover:bg-rose-600 px-8 py-4 rounded-md">How It Works</a></li>
           <li><a href="#" className="bg-rose-400 hover:bg-rose-600 px-8 py-4 rounded-md">Privacy Policy</a></li>
           <li>

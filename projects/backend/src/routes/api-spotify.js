@@ -89,7 +89,11 @@ module.exports = async function spotifyPlugin (app, opts) {
         return reply.notFound()
       }
 
-      return shareItem.sharedcontent // todo lowercase!!
+      return {
+        sharedBy: shareItem.sharedby,
+        sharedOn: shareItem.sharedon,
+        sharedReceipt: shareItem.sharedcontent
+      } // todo lowercase!!
     }
   })
 
