@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { readStats } from "../services/readStats";
 
 export const useSharedStats = () => {
+  const [sharedByData, setSharedByData] = useState({});
   const [statsData, setStatsData] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -12,7 +13,12 @@ export const useSharedStats = () => {
 
     readStats(shareId)
       .then((data) => {
-        setStatsData(data.items);
+
+        setSharedByData({
+          sharedBy: data.sharedBy,
+          sharedOn: data.sharedOn,
+        });
+        setStatsData(data.sharedReceipt.items);
       })
       .catch((error) => {
         setError(`Error fetching data [${error.message}]. Please try again later.`);
@@ -22,5 +28,5 @@ export const useSharedStats = () => {
       });
   }, []);
 
-  return { statsData, isLoading, error, fetchStatsData }
+  return { statsData, sharedByData, isLoading, error, fetchStatsData }
 }
